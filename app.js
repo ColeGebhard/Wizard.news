@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
         <ul>
         ${postList.map(post => `
         <li>${post.title}</li>
-        <li>${post.author}</li>
+        <li>${post.name}</li>
         `)}
           </ul>
           </body>
