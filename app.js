@@ -45,6 +45,9 @@ app.get("/", (req, res) => {
 app.get('/posts/:id', (req, res) => {
   const id = req.params.id;
   const post = postBank.find(id);
+  if (!post.id){
+    res.send(ErrorHandler)
+  }
   const html =
     `<!DOCTYPE html>
   <html>
@@ -73,6 +76,28 @@ app.get('/posts/:id', (req, res) => {
 res.send(html)
 })
 
+const ErrorHandler = ((err, req, res, next) => {
+  res.status(404)
+  console.error(err.stack)
+  const html = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>Wizard News</title>
+      <link rel="stylesheet" href="/style.css" />
+    </head>
+    <body>
+      <header><img src="/logo.png"/>Wizard News</header>
+      <div class="not-found">
+        <p>Accio Page! 🧙‍♀️ ... Page Not Found</p>
+        <img src="/dumbledore-404.gif" />
+      </div>
+    </body>
+    </html>`
+  res.send(html)
+})
+
+app.use(ErrorHandler)
 
 
 app.listen(PORT, () => {
