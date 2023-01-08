@@ -4,7 +4,7 @@ const postBank = require('./postBank.js')
 
 const app = express();
 
-const PORT = 1337;
+const { PORT = 1337 } = process.env;
 
 app.use(express.static('public'))
 app.use(morgan('dev'));
